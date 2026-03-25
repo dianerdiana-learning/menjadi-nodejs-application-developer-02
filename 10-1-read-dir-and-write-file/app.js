@@ -17,7 +17,13 @@ const fs = require('fs');
 
 function readDirAndWriteFile() {
   // Tulis jawaban di bawah ini
-  
+  const entries = fs.readdirSync(__dirname, { withFileTypes: true });
+  const folders = entries
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .sort();
+
+  fs.writeFileSync(`${__dirname}/out.txt`, folders.join(','));
 }
 
 readDirAndWriteFile();
